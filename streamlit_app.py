@@ -10,3 +10,8 @@ streamlit.text(' 🐔 hard boiled free-range egg')
 streamlit.text(' 🥑🍞avo toast')
 
 streamlit.header('🍌🥭 Build Your Own Fruit Smoothie 🥝🍇')
+import pandas
+
+my_fruit_list = pandas.read_csv("https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/fruit_macros.txt")  #pandas reads the csv from the link and pulls it into DF
+
+streamlit.dataframe(my_fruit_list)   #streamlit's version of Display
