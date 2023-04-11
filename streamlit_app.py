@@ -37,6 +37,6 @@ fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
 # outputs it onto the app screen as a table
 streamlit.dataframe(fruityvice_normalized)
 
-fruit_choice = streamlit.text_input('What fruit would you like information about?','Kiwi')   #the streamlit version of input
+fruit_choice = streamlit.text_input('What fruit would you like information about?','Kiwi')   #the streamlit version of input, here u can pre enter what u want too
 streamlit.write('The user entered ', fruit_choice)
 
