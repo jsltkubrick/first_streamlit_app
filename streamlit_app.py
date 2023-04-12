@@ -49,7 +49,8 @@ my_cur = my_cnx.cursor()
 #Allows Python code to execute PostgreSQL command in a database session, allows you to iterate over a result set from the query
 my_cur.execute("SELECT * FROM fruit_load_list")
 #executes it with the above command within snowflake
-my_data_row = my_cur.fetchone()
+my_data_row = my_cur.fetchall()
 #fetchone() retrieves the next row of a query result set and returns a single sequence
-streamlit.text("The fruit load list contains:")
-streamlit.text(my_data_row)
+#fetchall() retrieves everything
+streamlit.header("The fruit load list contains:")
+streamlit.dataframe(my_data_row)   #can swap .dataframe for .text if you prefer
