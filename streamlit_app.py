@@ -59,18 +59,20 @@ except URLError as e:
 #dont run anything past here while we troubleshoot
 streamlit.stop()
 
-my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"]) #sets a python variable which uses snowflake connector to 
-#connect to the python script pulled by streamlit secrets
-#it is the connection to the database
-my_cur = my_cnx.cursor()
-#Allows Python code to execute PostgreSQL command in a database session, allows you to iterate over a result set from the query
-my_cur.execute("SELECT * FROM fruit_load_list")
-#executes it with the above command within snowflake
-my_data_row = my_cur.fetchall()
-#fetchone() retrieves the next row of a query result set and returns a single sequence
-#fetchall() retrieves everything
+
+
 streamlit.header("The fruit load list contains:")
-streamlit.dataframe(my_data_row)   #can swap .dataframe for .text if you prefer
+
+def get_fruit_load_list():
+  with my_cur = my_cnx.cursor() #Allows Python code to execute PostgreSQL command in a database session, allows you to iterate over a result set from the query
+  my_cur.execute("SELECT * FROM fruit_load_list") #executes it with the above command within snowflake
+  return my_cur.fetchall() #fetchone() retrieves the next row of a query result set and returns a single sequence, fetchall() retrieves everything
+
+#adding a button to load the fruit: (so list won't show until you click the button)
+if streamlit.button('Get fruit load list!'):
+  my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])   #sets a python variable which uses snowflake connector to connect to the python script pulled by streamlit secrets
+  my_data_rows = get_fruit_load_list()                                                                        ##it is the connection to the database
+  streamlit.dataframe(my_data_row)   #can swap .dataframe for .text if you prefer
 
 #Allow the end user to add a fruit to the list
 add_my_fruit = streamlit.text_input('What fruit would you like to add?')   
