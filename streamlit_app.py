@@ -47,9 +47,9 @@ my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"]) #sets a p
 #it is the connection to the database
 my_cur = my_cnx.cursor()
 #Allows Python code to execute PostgreSQL command in a database session, allows you to iterate over a result set from the query
-my_cur.execute("SELECT CURRENT_USER(), CURRENT_ACCOUNT(), CURRENT_REGION()")
+my_cur.execute("SELECT * FROM fruit_load_list")
 #executes it with the above command within snowflake
 my_data_row = my_cur.fetchone()
 #fetchone() retrieves the next row of a query result set and returns a single sequence
-streamlit.text("Hello from Snowflake:")
+streamlit.text("The fruit load list contains:")
 streamlit.text(my_data_row)
