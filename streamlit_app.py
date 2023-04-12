@@ -41,3 +41,15 @@ fruit_choice = streamlit.text_input('What fruit would you like information about
 streamlit.write('The user entered ', fruit_choice)
 
 import snowflake.connector
+
+my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"]) #sets a python variable which uses snowflake connector to 
+#connect to the python script pulled by streamlit secrets
+#it is the connection to the database
+my_cur = my_cnx.cursor()
+#Allows Python code to execute PostgreSQL command in a database session, allows you to iterate over a result set from the query
+my_cur.execute("SELECT CURRENT_USER(), CURRENT_ACCOUNT(), CURRENT_REGION()")
+#executes it with the above command within snowflake
+my_data_row = my_cur.fetchone()
+#fetchone() retrieves the next row of a query result set and returns a single sequence
+streamlit.text("Hello from Snowflake:")
+streamlit.text(my_data_row)
