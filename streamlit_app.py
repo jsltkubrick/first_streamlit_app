@@ -59,12 +59,10 @@ except URLError as e:
 #dont run anything past here while we troubleshoot
 streamlit.stop()
 
-
-
 streamlit.header("The fruit load list contains:")
 
 def get_fruit_load_list():
-  with my_cur = my_cnx.cursor() #Allows Python code to execute PostgreSQL command in a database session, allows you to iterate over a result set from the query
+  with my_cnx.cursor() as my_cur: #Allows Python code to execute PostgreSQL command in a database session, allows you to iterate over a result set from the query
     my_cur.execute("SELECT * FROM fruit_load_list") #executes it with the above command within snowflake
     return my_cur.fetchall() #fetchone() retrieves the next row of a query result set and returns a single sequence, fetchall() retrieves everything
 
