@@ -65,8 +65,8 @@ streamlit.header("The fruit load list contains:")
 
 def get_fruit_load_list():
   with my_cur = my_cnx.cursor() #Allows Python code to execute PostgreSQL command in a database session, allows you to iterate over a result set from the query
-  my_cur.execute("SELECT * FROM fruit_load_list") #executes it with the above command within snowflake
-  return my_cur.fetchall() #fetchone() retrieves the next row of a query result set and returns a single sequence, fetchall() retrieves everything
+    my_cur.execute("SELECT * FROM fruit_load_list") #executes it with the above command within snowflake
+    return my_cur.fetchall() #fetchone() retrieves the next row of a query result set and returns a single sequence, fetchall() retrieves everything
 
 #adding a button to load the fruit: (so list won't show until you click the button)
 if streamlit.button('Get fruit load list!'):
